@@ -1,0 +1,922 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Manual de Instalación Linux Ubuntu — UMA</title>
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@300;400;600;700;800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --azul:     #0D2137;
+      --azul2:    #1565A7;
+      --azul3:    #D6E8F7;
+      --rojo:     #B71C1C;
+      --rojo2:    #E53935;
+      --dorado:   #F9A825;
+      --gris:     #F0F4F8;
+      --gris2:    #546E7A;
+      --blanco:   #FFFFFF;
+      --texto:    #1A2B3C;
+      --verde:    #1B5E20;
+      --verde2:   #E8F5E9;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Sora', sans-serif;
+      background: var(--azul);
+      color: var(--blanco);
+      overflow-x: hidden;
+    }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      min-height: 100vh;
+      background: linear-gradient(135deg, #0D2137 0%, #1565A7 60%, #0D2137 100%);
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 4rem 2rem 6rem;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23ffffff' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+    }
+
+    .hero-badge {
+      background: rgba(255,255,255,0.1);
+      border: 1px solid rgba(255,255,255,0.2);
+      backdrop-filter: blur(10px);
+      border-radius: 999px;
+      padding: 0.4rem 1.2rem;
+      font-size: 0.75rem;
+      font-weight: 600;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 2rem;
+      animation: fadeDown 0.8s ease both;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 7vw, 5rem);
+      font-weight: 800;
+      line-height: 1.05;
+      margin-bottom: 0.5rem;
+      animation: fadeDown 0.9s ease both;
+    }
+
+    .hero h1 span { color: var(--rojo2); }
+
+    .hero-sub {
+      font-size: 1.1rem;
+      font-weight: 300;
+      color: rgba(255,255,255,0.7);
+      margin-bottom: 3rem;
+      animation: fadeDown 1s ease both;
+    }
+
+    .hero-meta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+      margin-bottom: 3rem;
+      animation: fadeDown 1.1s ease both;
+    }
+
+    .hero-meta span {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      padding: 0.5rem 1rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.85);
+    }
+
+    .hero-meta span b { color: var(--dorado); }
+
+    .btn-nav {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      background: var(--rojo);
+      color: white;
+      text-decoration: none;
+      padding: 0.85rem 2rem;
+      border-radius: 10px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      transition: transform 0.2s, box-shadow 0.2s;
+      animation: fadeDown 1.2s ease both;
+    }
+
+    .btn-nav:hover { transform: translateY(-3px); box-shadow: 0 12px 30px rgba(183,28,28,0.4); }
+
+    .hero-alumnos {
+      margin: 0 0 2rem;
+      animation: fadeDown 1.15s ease both;
+    }
+
+    .alumnos-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--dorado);
+      margin-bottom: 0.7rem;
+    }
+
+    .alumnos-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      justify-content: center;
+    }
+
+    .alumnos-grid span {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: 999px;
+      padding: 0.35rem 1rem;
+      font-size: 0.82rem;
+      color: rgba(255,255,255,0.9);
+      backdrop-filter: blur(6px);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .alumnos-grid span:hover {
+      background: var(--rojo);
+      border-color: var(--rojo);
+      color: white;
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      animation: bounce 2s infinite;
+      color: rgba(255,255,255,0.4);
+      font-size: 0.8rem;
+      text-align: center;
+    }
+
+    .scroll-hint::before { content: '↓'; display: block; font-size: 1.4rem; }
+
+    /* ── MAIN CONTENT ─────────────────────────────────────── */
+    main {
+      background: var(--gris);
+      color: var(--texto);
+    }
+
+    .container { max-width: 900px; margin: 0 auto; padding: 0 1.5rem; }
+
+    /* ── ÍNDICE ───────────────────────────────────────────── */
+    .indice {
+      background: var(--blanco);
+      padding: 4rem 0;
+      border-bottom: 4px solid var(--azul3);
+    }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--rojo);
+      margin-bottom: 0.5rem;
+    }
+
+    .section-title {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--azul);
+      margin-bottom: 2.5rem;
+    }
+
+    .indice-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+      gap: 1rem;
+    }
+
+    .indice-item {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.2rem;
+      border-radius: 10px;
+      border: 1px solid var(--azul3);
+      background: var(--gris);
+      text-decoration: none;
+      color: var(--texto);
+      transition: all 0.2s;
+    }
+
+    .indice-item:hover {
+      background: var(--azul);
+      color: white;
+      border-color: var(--azul);
+      transform: translateX(4px);
+    }
+
+    .indice-num {
+      background: var(--rojo);
+      color: white;
+      font-weight: 700;
+      font-size: 0.8rem;
+      border-radius: 6px;
+      min-width: 36px;
+      height: 36px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .indice-item:hover .indice-num { background: var(--dorado); color: var(--azul); }
+
+    /* ── SECCIONES ────────────────────────────────────────── */
+    .seccion {
+      padding: 5rem 0;
+      border-bottom: 1px solid #e2eaf2;
+      background: var(--blanco);
+    }
+
+    .seccion:nth-child(even) { background: var(--gris); }
+
+    .sec-header {
+      display: flex;
+      align-items: center;
+      gap: 1.2rem;
+      margin-bottom: 2rem;
+    }
+
+    .sec-num {
+      background: var(--azul);
+      color: white;
+      font-weight: 800;
+      font-size: 1.1rem;
+      border-radius: 10px;
+      width: 52px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+
+    .sec-titulo {
+      font-size: 1.5rem;
+      font-weight: 800;
+      color: var(--azul);
+    }
+
+    .sec-subtitulo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--azul2);
+      margin: 2rem 0 0.8rem;
+      padding-left: 0.8rem;
+      border-left: 3px solid var(--rojo);
+    }
+
+    p { line-height: 1.8; color: var(--texto); margin-bottom: 1rem; font-size: 0.97rem; }
+
+    /* ── TABLA ────────────────────────────────────────────── */
+    .tabla-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: 12px; box-shadow: 0 2px 16px rgba(13,33,55,0.08); }
+
+    table { width: 100%; border-collapse: collapse; font-size: 0.9rem; }
+
+    thead tr { background: var(--azul); color: white; }
+    thead th { padding: 0.9rem 1.2rem; text-align: left; font-weight: 600; letter-spacing: 0.03em; }
+
+    tbody tr:nth-child(even) { background: var(--azul3); }
+    tbody tr:nth-child(odd)  { background: var(--blanco); }
+    tbody td { padding: 0.75rem 1.2rem; border-bottom: 1px solid #e2eaf2; color: var(--texto); }
+
+    /* ── LISTAS ───────────────────────────────────────────── */
+    .lista { list-style: none; padding: 0; margin: 1rem 0; }
+
+    .lista li {
+      display: flex;
+      gap: 0.8rem;
+      padding: 0.6rem 0;
+      border-bottom: 1px solid #eef2f7;
+      font-size: 0.95rem;
+      line-height: 1.6;
+      align-items: flex-start;
+    }
+
+    .lista li::before {
+      content: counter(li-counter);
+      counter-increment: li-counter;
+      background: var(--rojo);
+      color: white;
+      font-weight: 700;
+      font-size: 0.75rem;
+      border-radius: 50%;
+      min-width: 24px;
+      height: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+    .lista { counter-reset: li-counter; }
+
+    .lista-bul li::before { content: '•'; background: var(--azul2); font-size: 1rem; }
+
+    /* ── CÓDIGO ───────────────────────────────────────────── */
+    .code-block {
+      background: var(--azul);
+      border-radius: 12px;
+      padding: 1.4rem 1.6rem;
+      margin: 1.2rem 0;
+      border-left: 4px solid var(--rojo2);
+      overflow-x: auto;
+    }
+
+    .code-block pre {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.85rem;
+      line-height: 1.7;
+      color: #7DD3FC;
+      white-space: pre;
+    }
+
+    .code-block .comment { color: #64748B; }
+    .code-block .cmd     { color: #86EFAC; }
+
+    /* ── CAJAS ────────────────────────────────────────────── */
+    .caja {
+      display: flex;
+      gap: 1rem;
+      border-radius: 12px;
+      padding: 1.1rem 1.3rem;
+      margin: 1.2rem 0;
+      align-items: flex-start;
+    }
+
+    .caja-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .caja-body { font-size: 0.93rem; line-height: 1.7; }
+    .caja-label { font-weight: 700; display: block; margin-bottom: 0.2rem; }
+
+    .caja-tip    { background: var(--azul3); border-left: 4px solid var(--azul2); }
+    .caja-tip .caja-label { color: var(--azul2); }
+
+    .caja-advert { background: #fff3f3; border-left: 4px solid var(--rojo); }
+    .caja-advert .caja-label { color: var(--rojo); }
+
+    .caja-ok     { background: var(--verde2); border-left: 4px solid var(--verde); }
+    .caja-ok .caja-label { color: var(--verde); }
+
+    .caja-term   { background: var(--azul); border-left: 4px solid var(--azul2); }
+    .caja-term .caja-label, .caja-term .caja-body { color: #7DD3FC; }
+
+    .caja-dorado { background: #FFF8E1; border-left: 4px solid var(--dorado); }
+    .caja-dorado .caja-label { color: #B7720A; }
+
+    /* ── PROBLEMA CARD ────────────────────────────────────── */
+    .problema {
+      background: var(--blanco);
+      border-radius: 14px;
+      overflow: hidden;
+      margin: 1.5rem 0;
+      box-shadow: 0 2px 16px rgba(13,33,55,0.07);
+      border: 1px solid #e2eaf2;
+    }
+
+    .problema-header {
+      background: var(--azul);
+      padding: 0.9rem 1.3rem;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .problema-num {
+      background: var(--rojo);
+      color: white;
+      font-weight: 800;
+      font-size: 0.85rem;
+      border-radius: 6px;
+      padding: 0.2rem 0.6rem;
+    }
+
+    .problema-titulo { color: white; font-weight: 700; font-size: 1rem; }
+
+    .problema-body { padding: 1.2rem 1.4rem; }
+
+    .causa { font-size: 0.9rem; color: var(--gris2); margin-bottom: 0.8rem; }
+    .causa b { color: var(--rojo); }
+
+    .problema-sols { list-style: none; padding: 0; }
+    .problema-sols li {
+      padding: 0.4rem 0 0.4rem 1.4rem;
+      position: relative;
+      font-size: 0.92rem;
+      line-height: 1.6;
+      border-bottom: 1px solid #f0f4f8;
+    }
+    .problema-sols li::before { content: '→'; position: absolute; left: 0; color: var(--azul2); font-weight: 700; }
+
+    /* ── IMG PLACEHOLDER ─────────────────────────────────── */
+    .img-ph {
+      border: 2px dashed var(--azul2);
+      border-radius: 12px;
+      padding: 2rem;
+      text-align: center;
+      background: var(--azul3);
+      margin: 1.2rem 0;
+      color: var(--azul2);
+      font-size: 0.88rem;
+    }
+    .img-ph-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
+
+    /* ── APÉNDICE GITHUB ─────────────────────────────────── */
+    .github-card {
+      background: var(--azul);
+      border-radius: 16px;
+      padding: 2rem;
+      margin: 1.5rem 0;
+      border: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .github-card h3 { color: var(--dorado); font-size: 1.1rem; margin-bottom: 1rem; }
+    .github-card p, .github-card li { color: rgba(255,255,255,0.85); }
+    .github-card .lista li::before { background: var(--dorado); color: var(--azul); }
+
+    /* ── FOOTER ───────────────────────────────────────────── */
+    footer {
+      background: var(--azul);
+      color: rgba(255,255,255,0.7);
+      text-align: center;
+      padding: 3rem 1.5rem;
+      font-size: 0.85rem;
+      line-height: 2;
+    }
+
+    footer strong { color: var(--dorado); }
+
+    /* ── ANIMACIONES ─────────────────────────────────────── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50%       { transform: translateX(-50%) translateY(8px); }
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.6s ease, transform 0.6s ease;
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+
+    /* ── RESPONSIVE ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .hero h1 { font-size: 2.2rem; }
+      .sec-titulo { font-size: 1.2rem; }
+      .indice-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════ HERO ═══════ -->
+<header class="hero">
+  <div class="hero-badge">Universidad Modular Abierta · U.M.A.</div>
+  <h1>Manual de Instalación de<br><span>Linux Ubuntu</span></h1>
+  <p class="hero-sub">Ubuntu 24.04 LTS · Guía paso a paso para principiantes</p>
+  <div class="hero-meta">
+    <span><b>Docente:</b> Eymi Carolina Zavala Ortiz</span>
+    <span><b>Cátedra:</b> Sistemas Informáticos</span>
+    <span><b>Fecha:</b> Mayo 2026</span>
+  </div>
+  <div class="hero-alumnos">
+    <p class="alumnos-label">Elaborado por</p>
+    <div class="alumnos-grid">
+      <span>Monica Ventura</span>
+      <span>Hector Mejia</span>
+      <span>Luis Garcia</span>
+      <span>Lodwing Reyes</span>
+      <span>Gabriela Jimenez</span>
+      <span>Alison Canizalez</span>
+      <span>Oscar Efrain</span>
+      <span>Samuel Garcia</span>
+    </div>
+  </div>
+  <a href="#contenido" class="btn-nav">📖 Ver Manual Completo</a>
+  <div class="scroll-hint">Desliza hacia abajo</div>
+</header>
+
+<!-- ═══════ MAIN ═══════ -->
+<main id="contenido">
+
+  <!-- ÍNDICE -->
+  <section class="indice">
+    <div class="container">
+      <p class="section-label">Contenido</p>
+      <h2 class="section-title">Tabla de Contenido</h2>
+      <div class="indice-grid">
+        <a href="#intro"     class="indice-item"><span class="indice-num">📖</span><span>Introducción</span></a>
+        <a href="#sec1"      class="indice-item"><span class="indice-num">01</span><span>Requisitos</span></a>
+        <a href="#sec2"      class="indice-item"><span class="indice-num">02</span><span>Descarga del ISO</span></a>
+        <a href="#sec3"      class="indice-item"><span class="indice-num">03</span><span>Crear USB Booteable</span></a>
+        <a href="#sec4"      class="indice-item"><span class="indice-num">04</span><span>Configurar BIOS/UEFI</span></a>
+        <a href="#sec5"      class="indice-item"><span class="indice-num">05</span><span>Arranque desde USB</span></a>
+        <a href="#sec6"      class="indice-item"><span class="indice-num">06</span><span>Instalación paso a paso</span></a>
+        <a href="#sec7"      class="indice-item"><span class="indice-num">07</span><span>Configuración inicial</span></a>
+        <a href="#sec8"      class="indice-item"><span class="indice-num">08</span><span>Comandos esenciales</span></a>
+        <a href="#sec9"      class="indice-item"><span class="indice-num">09</span><span>Solución de problemas</span></a>
+        <a href="#sec10"     class="indice-item"><span class="indice-num">10</span><span>Recomendaciones</span></a>
+        <a href="#github"    class="indice-item"><span class="indice-num">📂</span><span>Subir a GitHub</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- INTRODUCCIÓN -->
+  <section class="seccion reveal" id="intro">
+    <div class="container">
+      <div class="sec-header">
+        <div class="sec-num">📖</div>
+        <h2 class="sec-titulo">Introducción</h2>
+      </div>
+      <p>Linux es un sistema operativo de código abierto creado en 1991 por Linus Torvalds. A diferencia de Windows, Linux es <strong>gratuito, seguro, altamente personalizable</strong> y utilizado en todo el mundo: desde teléfonos Android hasta los servidores que alimentan internet.</p>
+      <p>Ubuntu es la distribución de Linux más popular para principiantes, con interfaz amigable, enorme comunidad de soporte y miles de programas gratuitos. <strong>Ubuntu 24.04 LTS</strong> recibe soporte oficial hasta 2029.</p>
+      <div class="tabla-wrap">
+        <table>
+          <thead><tr><th>Característica</th><th>Linux Ubuntu</th><th>Windows 11</th></tr></thead>
+          <tbody>
+            <tr><td>Costo</td><td>Gratuito</td><td>Licencia de pago (~$139)</td></tr>
+            <tr><td>Seguridad</td><td>Muy alta (pocos virus)</td><td>Moderada (requiere antivirus)</td></tr>
+            <tr><td>Código fuente</td><td>Abierto (modificable)</td><td>Cerrado (propietario)</td></tr>
+            <tr><td>Rendimiento</td><td>Excelente en hardware antiguo</td><td>Requiere hardware reciente</td></tr>
+            <tr><td>Privacidad</td><td>Alta (sin telemetría forzada)</td><td>Moderada (recopila datos)</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="caja caja-ok"><span class="caja-icon">✅</span><div class="caja-body"><span class="caja-label">DATO IMPORTANTE</span>Ubuntu funciona perfectamente en computadoras donde Windows 11 ya no es compatible. ¡Es una excelente opción para dar nueva vida a equipos antiguos!</div></div>
+    </div>
+  </section>
+
+  <!-- SEC 1: REQUISITOS -->
+  <section class="seccion reveal" id="sec1">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">01</div><h2 class="sec-titulo">Requisitos de Hardware y Software</h2></div>
+      <div class="tabla-wrap">
+        <table>
+          <thead><tr><th>Componente</th><th>Mínimo requerido</th><th>Recomendado</th></tr></thead>
+          <tbody>
+            <tr><td>Procesador (CPU)</td><td>1 GHz (64 bits)</td><td>2 GHz dual-core o superior</td></tr>
+            <tr><td>Memoria RAM</td><td>2 GB</td><td>4 GB o más</td></tr>
+            <tr><td>Almacenamiento</td><td>15 GB libres</td><td>50 GB o más (SSD recomendado)</td></tr>
+            <tr><td>Pantalla</td><td>800 × 600 px</td><td>1080p Full HD</td></tr>
+            <tr><td>USB</td><td>8 GB mínimo</td><td>16 GB o más</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="sec-subtitulo">Material necesario</h3>
+      <ul class="lista lista-bul">
+        <li>Navegador de internet para descargar el ISO.</li>
+        <li>Programa Rufus o Balena Etcher para crear la USB booteable.</li>
+        <li>Archivo ISO de Ubuntu 24.04 LTS (~5.7 GB).</li>
+        <li>Memoria USB de al menos 8 GB (se borrarán sus datos).</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- SEC 2: DESCARGA ISO -->
+  <section class="seccion reveal" id="sec2">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">02</div><h2 class="sec-titulo">Descarga del ISO Oficial de Ubuntu</h2></div>
+      <p>El archivo ISO contiene el sistema operativo completo. Descárgalo únicamente desde el sitio oficial.</p>
+      <ol class="lista">
+        <li>Abre tu navegador y ve a <strong>ubuntu.com/download/desktop</strong></li>
+        <li>Haz clic en el botón <strong>Download 24.04 LTS</strong>.</li>
+        <li>El archivo se llama <code>ubuntu-24.04-desktop-amd64.iso</code> (~5.7 GB).</li>
+        <li>Espera a que la descarga se complete (15–45 minutos según tu conexión).</li>
+      </ol>
+      <div class="img-ph"><span class="img-ph-icon">📷</span>Página oficial de Ubuntu mostrando el botón de descarga de la versión 24.04 LTS</div>
+      <div class="caja caja-advert"><span class="caja-icon">⚠️</span><div class="caja-body"><span class="caja-label">IMPORTANTE</span>Descarga SOLO desde ubuntu.com. Sitios no oficiales pueden ofrecer versiones modificadas que contienen malware.</div></div>
+    </div>
+  </section>
+
+  <!-- SEC 3: USB BOOTEABLE -->
+  <section class="seccion reveal" id="sec3">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">03</div><h2 class="sec-titulo">Creación de la USB Booteable</h2></div>
+      <div class="caja caja-advert"><span class="caja-icon">⚠️</span><div class="caja-body"><span class="caja-label">ADVERTENCIA</span>La USB perderá TODOS sus datos durante este proceso. Guarda tus archivos importantes antes de continuar.</div></div>
+      <h3 class="sec-subtitulo">Opción A: Usando Rufus (Windows)</h3>
+      <ol class="lista">
+        <li>Descarga Rufus desde <strong>rufus.ie</strong> (gratuito, no requiere instalación).</li>
+        <li>Conecta la USB y abre Rufus.</li>
+        <li>En <em>Dispositivo</em>, selecciona tu USB.</li>
+        <li>En <em>Elección de arranque</em>, selecciona el ISO de Ubuntu.</li>
+        <li>Esquema: <strong>GPT</strong> · Sistema de destino: <strong>UEFI (no CSM)</strong>.</li>
+        <li>Haz clic en <strong>EMPEZAR</strong> y espera a que diga <strong>LISTO</strong>.</li>
+      </ol>
+      <div class="img-ph"><span class="img-ph-icon">📷</span>Rufus configurado con el ISO de Ubuntu, esquema GPT y destino UEFI</div>
+      <h3 class="sec-subtitulo">Opción B: Usando Balena Etcher (más sencillo)</h3>
+      <ol class="lista">
+        <li>Descarga desde <strong>balena.io/etcher</strong> e instálalo.</li>
+        <li>Haz clic en <strong>Flash from file</strong> y selecciona el ISO de Ubuntu.</li>
+        <li>Haz clic en <strong>Select target</strong> y selecciona tu USB.</li>
+        <li>Haz clic en <strong>Flash!</strong> y espera (10–15 minutos).</li>
+      </ol>
+      <div class="caja caja-tip"><span class="caja-icon">💡</span><div class="caja-body"><span class="caja-label">CONSEJO</span>Balena Etcher es más sencillo para principiantes. Rufus ofrece más opciones avanzadas. Ambas funcionan perfectamente.</div></div>
+    </div>
+  </section>
+
+  <!-- SEC 4: BIOS -->
+  <section class="seccion reveal" id="sec4">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">04</div><h2 class="sec-titulo">Configuración de la BIOS/UEFI</h2></div>
+      <p>Para que la computadora arranque desde la USB, necesitamos entrar a la BIOS y cambiar el orden de arranque.</p>
+      <div class="tabla-wrap">
+        <table>
+          <thead><tr><th>Marca del equipo</th><th>Tecla BIOS</th><th>Boot Menu rápido</th></tr></thead>
+          <tbody>
+            <tr><td>ASUS</td><td>F2 o Supr (Del)</td><td>F8</td></tr>
+            <tr><td>MSI</td><td>Supr (Del)</td><td>F11</td></tr>
+            <tr><td>Gigabyte</td><td>Supr (Del) o F2</td><td>F12</td></tr>
+            <tr><td>HP</td><td>F10 o Esc</td><td>F9</td></tr>
+            <tr><td>Dell</td><td>F2</td><td>F12</td></tr>
+            <tr><td>Lenovo</td><td>F1, F2 o Fn+F2</td><td>F12</td></tr>
+            <tr><td>Acer</td><td>F2 o Supr (Del)</td><td>F12</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="sec-subtitulo">Cambiar el Boot Order</h3>
+      <ol class="lista">
+        <li>Ingresa a la BIOS presionando la tecla correspondiente al encender.</li>
+        <li>Ve a la sección <strong>Boot</strong> → <strong>Boot Priority</strong>.</li>
+        <li>Mueve la USB al <strong>primer lugar</strong> con las teclas + / - o arrastrando.</li>
+        <li>Presiona <strong>F10</strong> para guardar y salir.</li>
+      </ol>
+      <div class="img-ph"><span class="img-ph-icon">📷</span>BIOS mostrando el Boot Order con la USB en primer lugar</div>
+      <div class="caja caja-tip"><span class="caja-icon">💡</span><div class="caja-body"><span class="caja-label">CONSEJO</span>Usa el Boot Menu rápido (F12, F11 o F9) para seleccionar la USB directamente sin cambiar la configuración permanente de la BIOS.</div></div>
+    </div>
+  </section>
+
+  <!-- SEC 5: ARRANQUE -->
+  <section class="seccion reveal" id="sec5">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">05</div><h2 class="sec-titulo">Arranque desde USB</h2></div>
+      <ol class="lista">
+        <li>Conecta la USB booteable al computador.</li>
+        <li>Apaga y vuelve a encender el equipo.</li>
+        <li>Aparecerá el menú GRUB de Ubuntu.</li>
+        <li>Selecciona <strong>Try or Install Ubuntu</strong> y presiona Enter.</li>
+      </ol>
+      <div class="img-ph"><span class="img-ph-icon">📷</span>Menú GRUB de Ubuntu mostrando la opción "Try or Install Ubuntu"</div>
+      <div class="caja caja-dorado"><span class="caja-icon">🖥️</span><div class="caja-body"><span class="caja-label">MODO LIVE</span>Ubuntu te permite probar el sistema ANTES de instalarlo, sin modificar tu disco duro. Selecciona <strong>Try Ubuntu</strong> para explorar. Cuando estés listo, haz clic en el ícono <strong>Install Ubuntu</strong> del escritorio.</div></div>
+    </div>
+  </section>
+
+  <!-- SEC 6: INSTALACIÓN -->
+  <section class="seccion reveal" id="sec6">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">06</div><h2 class="sec-titulo">Instalación de Ubuntu Paso a Paso</h2></div>
+      <p>El instalador es gráfico e intuitivo. El proceso toma entre 15 y 30 minutos.</p>
+      <div class="tabla-wrap">
+        <table>
+          <thead><tr><th>Paso</th><th>Qué hacer</th></tr></thead>
+          <tbody>
+            <tr><td><strong>1. Idioma</strong></td><td>Selecciona <em>Español</em> y haz clic en <strong>Instalar Ubuntu</strong>.</td></tr>
+            <tr><td><strong>2. Teclado</strong></td><td>Elige <em>Español (Latinoamérica)</em> y haz clic en Continuar.</td></tr>
+            <tr><td><strong>3. Internet</strong></td><td>Conéctate al Wi-Fi si está disponible (recomendado).</td></tr>
+            <tr><td><strong>4. Tipo</strong></td><td>Selecciona <em>Instalación normal</em>. Marca "Descargar actualizaciones".</td></tr>
+            <tr><td><strong>5. Disco</strong></td><td>Elige <em>Borrar disco e instalar Ubuntu</em> → Instalar ahora.</td></tr>
+            <tr><td><strong>6. Zona horaria</strong></td><td>Haz clic sobre El Salvador en el mapa o escribe América/El_Salvador.</td></tr>
+            <tr><td><strong>7. Usuario</strong></td><td>Escribe tu nombre, el nombre del equipo y crea una contraseña segura.</td></tr>
+            <tr><td><strong>8. Esperar</strong></td><td>Ubuntu copia los archivos automáticamente (10–25 min). No apagues el equipo.</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="img-ph"><span class="img-ph-icon">📷</span>Pantalla del instalador mostrando la selección del tipo de instalación en disco</div>
+      <div class="caja caja-advert"><span class="caja-icon">⚠️</span><div class="caja-body"><span class="caja-label">IMPORTANTE</span>Si eliges "Borrar disco", se eliminarán TODOS los datos del disco. Haz una copia de seguridad antes.</div></div>
+      <div class="caja caja-ok"><span class="caja-icon">✅</span><div class="caja-body"><span class="caja-label">LISTO</span>Cuando termine, retira la USB cuando te lo indique y presiona Enter. ¡Ubuntu estará instalado!</div></div>
+    </div>
+  </section>
+
+  <!-- SEC 7: CONFIG INICIAL -->
+  <section class="seccion reveal" id="sec7">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">07</div><h2 class="sec-titulo">Configuración Inicial del Sistema</h2></div>
+      <p>Al iniciar Ubuntu por primera vez, sigue el asistente de bienvenida y luego actualiza el sistema.</p>
+      <h3 class="sec-subtitulo">Actualizar el sistema (muy importante)</h3>
+      <p>Abre la Terminal con <kbd>Ctrl + Alt + T</kbd> y ejecuta:</p>
+      <div class="code-block"><pre><span class="cmd">sudo apt update</span>
+<span class="cmd">sudo apt upgrade -y</span>
+<span class="cmd">sudo apt autoremove -y</span></pre></div>
+      <div class="caja caja-tip"><span class="caja-icon">💡</span><div class="caja-body"><span class="caja-label">CONSEJO</span><strong>sudo</strong> ejecuta el comando como administrador. Te pedirá tu contraseña. Al escribirla no verás nada en pantalla — es normal, es por seguridad.</div></div>
+      <h3 class="sec-subtitulo">Instalar apps esenciales</h3>
+      <div class="code-block"><pre><span class="comment"># Instalar VLC (reproductor de video)</span>
+<span class="cmd">sudo apt install vlc -y</span>
+
+<span class="comment"># Instalar GIMP (editor de imágenes)</span>
+<span class="cmd">sudo apt install gimp -y</span>
+
+<span class="comment"># Instalar Git</span>
+<span class="cmd">sudo apt install git -y</span></pre></div>
+    </div>
+  </section>
+
+  <!-- SEC 8: COMANDOS -->
+  <section class="seccion reveal" id="sec8">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">08</div><h2 class="sec-titulo">Comandos Esenciales de la Terminal</h2></div>
+      <h3 class="sec-subtitulo">Navegación y archivos</h3>
+      <div class="tabla-wrap">
+        <table>
+          <thead><tr><th>Comando</th><th>¿Qué hace?</th><th>Ejemplo</th></tr></thead>
+          <tbody>
+            <tr><td><code>pwd</code></td><td>Muestra la carpeta donde estás</td><td>/home/monica</td></tr>
+            <tr><td><code>ls</code></td><td>Lista archivos y carpetas</td><td>Documentos Escritorio</td></tr>
+            <tr><td><code>cd carpeta</code></td><td>Entrar a una carpeta</td><td>cd Documentos</td></tr>
+            <tr><td><code>cd ..</code></td><td>Regresar a la carpeta anterior</td><td>cd ..</td></tr>
+            <tr><td><code>mkdir nombre</code></td><td>Crear una carpeta nueva</td><td>mkdir MiProyecto</td></tr>
+            <tr><td><code>rm archivo</code></td><td>Eliminar un archivo</td><td>rm notas.txt</td></tr>
+            <tr><td><code>cp origen dest</code></td><td>Copiar un archivo</td><td>cp foto.jpg /home/</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <h3 class="sec-subtitulo">Comandos del sistema</h3>
+      <div class="code-block"><pre><span class="comment"># Actualizar lista de paquetes</span>
+<span class="cmd">sudo apt update</span>
+
+<span class="comment"># Instalar un programa</span>
+<span class="cmd">sudo apt install nombre-programa</span>
+
+<span class="comment"># Reiniciar el sistema</span>
+<span class="cmd">sudo reboot</span>
+
+<span class="comment"># Ver espacio en disco</span>
+<span class="cmd">df -h</span>
+
+<span class="comment"># Ver memoria RAM disponible</span>
+<span class="cmd">free -h</span></pre></div>
+      <div class="caja caja-tip"><span class="caja-icon">💡</span><div class="caja-body"><span class="caja-label">CONSEJO</span>Presiona <strong>Tab</strong> para autocompletar comandos o nombres de archivos. Presiona <strong>↑</strong> para repetir el último comando.</div></div>
+    </div>
+  </section>
+
+  <!-- SEC 9: PROBLEMAS -->
+  <section class="seccion reveal" id="sec9">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">09</div><h2 class="sec-titulo">Solución de Problemas Comunes</h2></div>
+
+      <div class="problema">
+        <div class="problema-header"><span class="problema-num">01</span><span class="problema-titulo">La USB no arranca / el equipo la ignora</span></div>
+        <div class="problema-body">
+          <p class="causa"><b>Causa:</b> Boot Order incorrecto o Secure Boot bloqueando el arranque.</p>
+          <ul class="problema-sols">
+            <li>Usa el Boot Menu rápido (F12/F11/F9) y selecciona la USB directamente.</li>
+            <li>En la BIOS, desactiva temporalmente Secure Boot.</li>
+            <li>Recrea la USB con Rufus usando esquema GPT y sistema UEFI.</li>
+            <li>Prueba en un puerto USB diferente (preferiblemente USB 2.0).</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="problema">
+        <div class="problema-header"><span class="problema-num">02</span><span class="problema-titulo">Pantalla negra al iniciar Ubuntu</span></div>
+        <div class="problema-body">
+          <p class="causa"><b>Causa:</b> Driver de tarjeta gráfica incompatible (frecuente con Nvidia).</p>
+          <ul class="problema-sols">
+            <li>En el menú GRUB, selecciona <strong>Ubuntu (safe graphics)</strong>.</li>
+            <li>Una vez instalado: Configuración → Software y actualizaciones → Controladores adicionales.</li>
+            <li>Desde terminal: <code>sudo ubuntu-drivers autoinstall</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="problema">
+        <div class="problema-header"><span class="problema-num">03</span><span class="problema-titulo">Sin conexión Wi-Fi</span></div>
+        <div class="problema-body">
+          <p class="causa"><b>Causa:</b> Driver de tarjeta inalámbrica no instalado.</p>
+          <ul class="problema-sols">
+            <li>Conéctate temporalmente con cable Ethernet.</li>
+            <li>Ejecuta: <code>sudo ubuntu-drivers autoinstall</code></li>
+            <li>Reinicia: <code>sudo reboot</code></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="problema">
+        <div class="problema-header"><span class="problema-num">04</span><span class="problema-titulo">Ubuntu no aparece al arrancar (Dual Boot)</span></div>
+        <div class="problema-body">
+          <p class="causa"><b>Causa:</b> Windows tomó control del arranque o GRUB no se instaló.</p>
+          <ul class="problema-sols">
+            <li>Arranca desde la USB en modo prueba (Try Ubuntu).</li>
+            <li>Ejecuta: <code>sudo grub-install /dev/sda</code></li>
+            <li>Luego: <code>sudo update-grub</code> y reinicia sin la USB.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="problema">
+        <div class="problema-header"><span class="problema-num">05</span><span class="problema-titulo">La instalación se congela</span></div>
+        <div class="problema-body">
+          <p class="causa"><b>Causa:</b> USB defectuosa, RAM con errores o disco dañado.</p>
+          <ul class="problema-sols">
+            <li>Espera al menos 30 minutos antes de asumir que está congelado.</li>
+            <li>Recrea la USB con una memoria diferente.</li>
+            <li>En el menú GRUB selecciona "Check disk for defects" para verificar el ISO.</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SEC 10: RECOMENDACIONES -->
+  <section class="seccion reveal" id="sec10">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">10</div><h2 class="sec-titulo">Recomendaciones Finales</h2></div>
+      <ul class="lista lista-bul">
+        <li><strong>Actualiza semanalmente:</strong> <code>sudo apt update && sudo apt upgrade -y</code></li>
+        <li><strong>Haz copias de seguridad</strong> con Déjà Dup (incluido en Ubuntu) o guarda archivos en la nube.</li>
+        <li><strong>Explora Ubuntu Software Center</strong> para encontrar alternativas gratuitas a programas de pago.</li>
+        <li><strong>Aprende más en:</strong> ubuntu.com/tutorials · linuxcommand.org · askubuntu.com</li>
+        <li><strong>Equipos lentos:</strong> Prueba Xubuntu o Lubuntu, versiones más ligeras de Ubuntu.</li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- APÉNDICE: GITHUB -->
+  <section class="seccion reveal" id="github">
+    <div class="container">
+      <div class="sec-header"><div class="sec-num">📂</div><h2 class="sec-titulo">¿Cómo Subir Este Manual a GitHub?</h2></div>
+      <p>GitHub es una plataforma gratuita donde puedes almacenar y compartir tus proyectos. Ya tienes tu cuenta <strong>mventura2026</strong>. Aquí te mostramos las 3 formas de subir archivos:</p>
+
+      <div class="github-card">
+        <h3>Opción A: Desde el navegador (sin instalar nada) ⭐ Recomendada</h3>
+        <ol class="lista">
+          <li>Ve a github.com → Haz clic en <strong>"+"</strong> → <strong>New repository</strong>.</li>
+          <li>Nombre: <code>manual-linux-ubuntu</code> · Marca <em>Add a README file</em>.</li>
+          <li>Haz clic en <strong>Create repository</strong>.</li>
+          <li>Dentro del repo: <strong>Agregar archivo → Cargar archivos</strong>.</li>
+          <li>Arrastra tu <code>.docx</code> y escribe un mensaje de commit.</li>
+          <li>Clic en <strong>Commit changes</strong>. ¡Listo!</li>
+        </ol>
+      </div>
+
+      <div class="github-card">
+        <h3>Opción B: Desde la Terminal de Ubuntu</h3>
+        <div class="code-block"><pre><span class="comment"># Instalar Git</span>
+<span class="cmd">sudo apt install git -y</span>
+
+<span class="comment"># Configurar tu identidad (solo la primera vez)</span>
+<span class="cmd">git config --global user.name "Monica Ventura"</span>
+<span class="cmd">git config --global user.email "tucorreo@email.com"</span>
+
+<span class="comment"># Clonar tu repositorio</span>
+<span class="cmd">git clone https://github.com/mventura2026/manual-linux-ubuntu.git</span>
+<span class="cmd">cd manual-linux-ubuntu</span>
+
+<span class="comment"># Agregar archivos y subir</span>
+<span class="cmd">git add .</span>
+<span class="cmd">git commit -m "Agregar manual de instalación Linux"</span>
+<span class="cmd">git push origin main</span></pre></div>
+      </div>
+
+      <div class="caja caja-ok" style="margin-top:1.5rem"><span class="caja-icon">🔗</span><div class="caja-body"><span class="caja-label">TU ENLACE QUEDARÍA ASÍ</span>github.com/mventura2026/manual-linux-ubuntu — Puedes compartirlo directamente con tu maestra para entregar el manual.</div></div>
+    </div>
+  </section>
+
+</main>
+
+<!-- FOOTER -->
+<footer>
+  <strong>Universidad Modular Abierta · U.M.A.</strong><br>
+  Manual de Instalación de Linux Ubuntu 24.04 LTS · Mayo 2026<br>
+  Cátedra: Sistemas Informáticos Organizacionales · Docente: Eymi Carolina Zavala Ortiz<br>
+  <span style="color:rgba(255,255,255,0.4);font-size:0.78rem">Monica Ventura · Hector Mejia · Luis Garcia · Lodwing Reyes · Gabriela Jimenez · Alison Canizalez · Oscar Efrain · Samuel Garcia</span>
+</footer>
+
+<script>
+  // Reveal on scroll
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.08 });
+  reveals.forEach(r => observer.observe(r));
+</script>
+</body>
+</html>
