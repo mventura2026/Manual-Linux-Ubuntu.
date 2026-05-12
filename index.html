@@ -446,6 +446,29 @@
     }
     .img-ph-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
 
+    .img-real {
+      margin: 1.5rem 0;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 28px rgba(13,33,55,0.18);
+      border: 2px solid var(--azul3);
+    }
+    .img-real img {
+      width: 100%;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .img-real:hover img { transform: scale(1.02); }
+    .img-real figcaption {
+      background: var(--azul);
+      color: rgba(255,255,255,0.75);
+      font-size: 0.82rem;
+      padding: 0.65rem 1.2rem;
+      text-align: center;
+      font-style: italic;
+      border-top: 2px solid var(--rojo);
+    }
+
     /* ── APÉNDICE GITHUB ─────────────────────────────────── */
     .github-card {
       background: var(--azul);
@@ -612,7 +635,10 @@
         <li>El archivo se llama <code>ubuntu-24.04-desktop-amd64.iso</code> (~5.7 GB).</li>
         <li>Espera a que la descarga se complete (15–45 minutos según tu conexión).</li>
       </ol>
-      <div class="img-ph"><span class="img-ph-icon">📷</span>Página oficial de Ubuntu mostrando el botón de descarga de la versión 24.04 LTS</div>
+      <figure class="img-real">
+        <img src="https://assets.ubuntu.com/v1/79438d5e-ubuntu-24-desktop.png" alt="Descarga Ubuntu 24.04 LTS" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/UbuntuCoF.svg/512px-UbuntuCoF.svg.png'" />
+        <figcaption>Página oficial de Ubuntu — Descarga de Ubuntu 24.04 LTS (Noble Numbat)</figcaption>
+      </figure>
       <div class="caja caja-advert"><span class="caja-icon">⚠️</span><div class="caja-body"><span class="caja-label">IMPORTANTE</span>Descarga SOLO desde ubuntu.com. Sitios no oficiales pueden ofrecer versiones modificadas que contienen malware.</div></div>
     </div>
   </section>
@@ -631,7 +657,10 @@
         <li>Esquema: <strong>GPT</strong> · Sistema de destino: <strong>UEFI (no CSM)</strong>.</li>
         <li>Haz clic en <strong>EMPEZAR</strong> y espera a que diga <strong>LISTO</strong>.</li>
       </ol>
-      <div class="img-ph"><span class="img-ph-icon">📷</span>Rufus configurado con el ISO de Ubuntu, esquema GPT y destino UEFI</div>
+      <figure class="img-real">
+        <img src="https://www.winusb.net/wp-content/uploads/2024/04/Screenshot_1_1306_911-750x523.webp" alt="Rufus configurado con Ubuntu GPT UEFI" onerror="this.src='https://rufus.ie/pics/rufus_en.png'" />
+        <figcaption>Rufus configurado correctamente — Esquema GPT · Sistema de destino UEFI (no CSM)</figcaption>
+      </figure>
       <h3 class="sec-subtitulo">Opción B: Usando Balena Etcher (más sencillo)</h3>
       <ol class="lista">
         <li>Descarga desde <strong>balena.io/etcher</strong> e instálalo.</li>
@@ -669,7 +698,10 @@
         <li>Mueve la USB al <strong>primer lugar</strong> con las teclas + / - o arrastrando.</li>
         <li>Presiona <strong>F10</strong> para guardar y salir.</li>
       </ol>
-      <div class="img-ph"><span class="img-ph-icon">📷</span>BIOS mostrando el Boot Order con la USB en primer lugar</div>
+      <figure class="img-real">
+        <img src="https://i.sstatic.net/3Jklt.jpg" alt="BIOS Boot Order con USB primero" onerror="this.src='https://www.howtogeek.com/wp-content/uploads/2020/05/bios-boot-order.png'" />
+        <figcaption>BIOS/UEFI — Boot Order con la memoria USB en el primer lugar de arranque</figcaption>
+      </figure>
       <div class="caja caja-tip"><span class="caja-icon">💡</span><div class="caja-body"><span class="caja-label">CONSEJO</span>Usa el Boot Menu rápido (F12, F11 o F9) para seleccionar la USB directamente sin cambiar la configuración permanente de la BIOS.</div></div>
     </div>
   </section>
@@ -684,7 +716,10 @@
         <li>Aparecerá el menú GRUB de Ubuntu.</li>
         <li>Selecciona <strong>Try or Install Ubuntu</strong> y presiona Enter.</li>
       </ol>
-      <div class="img-ph"><span class="img-ph-icon">📷</span>Menú GRUB de Ubuntu mostrando la opción "Try or Install Ubuntu"</div>
+      <figure class="img-real">
+        <img src="https://cdn.neowin.com/news/images/uploaded/2022/09/1663515845_screenshot_2022-09-18_204258.jpg" alt="Menú GRUB de Ubuntu" onerror="this.src='https://help.ubuntu.com/community/Grub2?action=AttachFile&do=get&target=grub2-menu.png'" />
+        <figcaption>Menú GRUB de Ubuntu — Selecciona "Try or Install Ubuntu" y presiona Enter</figcaption>
+      </figure>
       <div class="caja caja-dorado"><span class="caja-icon">🖥️</span><div class="caja-body"><span class="caja-label">MODO LIVE</span>Ubuntu te permite probar el sistema ANTES de instalarlo, sin modificar tu disco duro. Selecciona <strong>Try Ubuntu</strong> para explorar. Cuando estés listo, haz clic en el ícono <strong>Install Ubuntu</strong> del escritorio.</div></div>
     </div>
   </section>
@@ -709,7 +744,10 @@
           </tbody>
         </table>
       </div>
-      <div class="img-ph"><span class="img-ph-icon">📷</span>Pantalla del instalador mostrando la selección del tipo de instalación en disco</div>
+      <figure class="img-real">
+        <img src="https://preview.redd.it/partitions-to-install-windows-11-with-a-clean-install-v0-npuru2co7el81.jpg?width=2912&format=pjpg&auto=webp&s=48e95d2a81c3624d7a21c851d5525051e7eb2435" alt="Selección de disco para instalar Ubuntu" onerror="this.src='https://upload.wikimedia.org/wikipedia/commons/thumb/9/9e/UbuntuCoF.svg/256px-UbuntuCoF.svg.png'" />
+        <figcaption>Instalador de Ubuntu — Pantalla de selección de disco (Borrar disco e instalar Ubuntu)</figcaption>
+      </figure>
       <div class="caja caja-advert"><span class="caja-icon">⚠️</span><div class="caja-body"><span class="caja-label">IMPORTANTE</span>Si eliges "Borrar disco", se eliminarán TODOS los datos del disco. Haz una copia de seguridad antes.</div></div>
       <div class="caja caja-ok"><span class="caja-icon">✅</span><div class="caja-body"><span class="caja-label">LISTO</span>Cuando termine, retira la USB cuando te lo indique y presiona Enter. ¡Ubuntu estará instalado!</div></div>
     </div>
